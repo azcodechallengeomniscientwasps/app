@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "607663819662",
+    "firebase_url": "https://code-challenge-a41a7.firebaseio.com",
+    "project_id": "code-challenge-a41a7",
+    "storage_bucket": "code-challenge-a41a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607663819662:android:1c75f0d5376207d9",
+        "android_client_info": {
+          "package_name": "com.makeapede.azcodechallengeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607663819662-tbg21hgj8ujsutkso0ck5ujkf3fu7ebq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACj2HvrNhWdQll9e1Nq8kZJM_0ln0TI-o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
