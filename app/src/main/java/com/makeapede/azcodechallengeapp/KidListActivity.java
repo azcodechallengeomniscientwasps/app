@@ -18,9 +18,12 @@
 
 package com.makeapede.azcodechallengeapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,17 +39,37 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 public class KidListActivity extends AppCompatActivity {
-	KidAdapter adapter;
+	private KidAdapter adapter;
+	private RecyclerView list;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kid_list);
 
+		list = (RecyclerView) findViewById(R.id.kid_list);
+		list.setHasFixedSize(true);
+
+		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+		list.setLayoutManager(layoutManager);
+
 		adapter = new KidAdapter(new ArrayList<>());
 
-		findViewById(R.id.add_button).setOnClickListener(
-				(v) -> adapter.addItem(new Kid(0, "Name")));
+		findViewById(R.id.add_button).setOnClickListener((v) -> {
+			Log.d("KidListActivity", "Adding item");
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			builder.setTitle("Test");
+			builder.setMessage("test");
+			builder.setPositiveButton("OK", (dialogInterface, i) -> {
+				adapter.addItem(new Kid(0, "Name"));
+			});
+
+			builder.create().show();
+		});
+
+		list.setAdapter(adapter);
 	}
 
 	void signOut() {
@@ -75,7 +98,7 @@ public class KidListActivity extends AppCompatActivity {
 				return true;
 			case R.id.action_account:
 				//go to password confirmation page
-				Log.d("KidListActivity", "attempting password check");
+				Log.d("KidListActivity", "Attempting password check");
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -90,8 +113,12 @@ public class KidListActivity extends AppCompatActivity {
 
 		public void addItem(Kid kid) {
 			kids.add(kid);
-
-			notifyDataSetChanged();
+			Log.d("KidListActivity", "Printing all kids");
+			for(Kid kid1 : kids) {
+				Log.d("KidListActivity", kid1.name);
+			}
+			//notifyDataSetChanged();
+			notifyItemInserted(kids.size()-1);
 		}
 
 		@Override
@@ -105,7 +132,7 @@ public class KidListActivity extends AppCompatActivity {
 		@Override
 		public void onBindViewHolder(ViewHolder holder, int position) {
 			holder.nameView.setText(kids.get(position).name);
-			holder.ageView.setText(kids.get(position).age);
+			holder.ageView.setText(String.valueOf(kids.get(position).age));
 		}
 
 		@Override
