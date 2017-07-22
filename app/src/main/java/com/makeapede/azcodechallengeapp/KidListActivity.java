@@ -136,14 +136,7 @@ public class KidListActivity extends AppCompatActivity {
 		// Handle item selection
 		switch (item.getItemId()) {
 			case R.id.action_logout:
-				//logout method thingy
-				Log.d("KidListActivity", "Attempting logout...");
 				signOut();
-				break;
-
-			case R.id.action_account:
-				//go to password confirmation page
-				Log.d("KidListActivity", "Attempting password check");
 				break;
 
 			case R.id.action_events:

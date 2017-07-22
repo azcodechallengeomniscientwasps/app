@@ -21,6 +21,7 @@ package com.makeapede.azcodechallengeapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -36,18 +37,19 @@ public class LoginActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_first);
 
 		FirebaseAuth auth = FirebaseAuth.getInstance();
-		if (auth.getCurrentUser() == null) {
-			startActivityForResult(
+		if(auth.getCurrentUser() != null) {
+			startActivity(new Intent(this, KidListActivity.class));
+			finish();
+		} else {
+			findViewById(R.id.loginButton).setOnClickListener(view -> startActivityForResult(
 					AuthUI.getInstance()
 						  .createSignInIntentBuilder()
 						  .setAvailableProviders(
 								  Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build())).build(),
-					LOG_IN_RC);
-		} else {
-			startActivity(new Intent(this, KidListActivity.class));
-			finish();
+					LOG_IN_RC));
 		}
 	}
 

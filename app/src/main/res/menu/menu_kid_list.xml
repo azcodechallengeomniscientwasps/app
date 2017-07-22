@@ -28,10 +28,6 @@
 		app:showAsAction="ifRoom"/>
 
     <item
-		android:id="@+id/action_account"
-        android:title="@string/editAccount_text"
-        app:showAsAction="never"/>
-    <item
 		android:id="@+id/action_logout"
         android:title="@string/logout_text"
         app:showAsAction="never"/>

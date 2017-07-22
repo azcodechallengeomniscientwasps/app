@@ -17,7 +17,7 @@
   -->
 
 <resources>
-	<string name="app_name">AZCodeChallengeApp</string>
+	<string name="app_name">XYZ Kids</string>
 	<string name="kid_list_title">Your Kids</string>
 	<string name="game_list_title">Games</string>
 	<string name="counting_game_title">Counting</string>
