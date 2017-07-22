@@ -18,7 +18,7 @@
 
 package com.makeapede.azcodechallengeapp;
 
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -30,17 +30,29 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class KidListActivity extends AppCompatActivity {
+	public static final String EXTRA_KID_NAME = "extra-name";
+
 	private KidAdapter adapter;
 	private RecyclerView list;
+	private FirebaseUser user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +72,44 @@ public class KidListActivity extends AppCompatActivity {
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-			builder.setTitle("Test");
-			builder.setMessage("test");
+			builder.setView(R.layout.add_kid_dialog);
 			builder.setPositiveButton("OK", (dialogInterface, i) -> {
-				adapter.addItem(new Kid(0, "Name"));
+				Dialog dialog = (Dialog) dialogInterface;
+
+				String name = ((EditText) dialog.findViewById(R.id.name_input)).getText().toString();
+				String age = ((EditText) dialog.findViewById(R.id.age_input)).getText().toString();
+
+				adapter.addItem(new Kid(Integer.valueOf(age), name));
 			});
 
 			builder.create().show();
 		});
 
 		list.setAdapter(adapter);
+
+		user = FirebaseAuth.getInstance().getCurrentUser();
+		if (user != null) {
+			String uid = user.getUid();
+
+			DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/" + uid);
+			ref.addValueEventListener(new ValueEventListener() {
+				@Override
+				public void onDataChange(DataSnapshot dataSnapshot) {
+					ArrayList<Kid> kids = new ArrayList<>();
+
+					for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+						Kid kid = snapshot.getValue(Kid.class);
+						kids.add(kid);
+					}
+
+					Collections.sort(kids);
+					adapter.setData(kids);
+				}
+
+				@Override
+				public void onCancelled(DatabaseError databaseError) {}
+			});
+		}
 	}
 
 	void signOut() {
@@ -111,13 +151,19 @@ public class KidListActivity extends AppCompatActivity {
 			this.kids = kids;
 		}
 
+		public void setData(ArrayList<Kid> kids) {
+			this.kids = kids;
+			notifyDataSetChanged();
+		}
+
 		public void addItem(Kid kid) {
 			kids.add(kid);
-			Log.d("KidListActivity", "Printing all kids");
-			for(Kid kid1 : kids) {
-				Log.d("KidListActivity", kid1.name);
+
+			if(user != null) {
+				DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/" + user.getUid());
+				ref.push().setValue(kid);
 			}
-			//notifyDataSetChanged();
+
 			notifyItemInserted(kids.size()-1);
 		}
 
@@ -149,17 +195,22 @@ public class KidListActivity extends AppCompatActivity {
 
 				nameView = itemView.findViewById(R.id.name);
 				ageView = itemView.findViewById(R.id.age);
+
+				itemView.setOnClickListener(view -> {
+					Intent intent = new Intent(KidListActivity.this, GameListActivity.class);
+
+					intent.putExtra(EXTRA_KID_NAME, nameView.getText().toString());
+
+					startActivity(intent);
+				});
+
+				itemView.setOnLongClickListener(view -> {
+					// Show edit dialog/screen
+
+
+					return true;
+				});
 			}
-		}
-	}
-
-	public class Kid {
-		public int age;
-		public String name;
-
-		public Kid(int age, String name) {
-			this.age = age;
-			this.name = name;
 		}
 	}
 }

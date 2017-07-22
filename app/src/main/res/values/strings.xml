@@ -18,6 +18,9 @@
 
 <resources>
 	<string name="app_name">AZCodeChallengeApp</string>
+	<string name="kid_list_title">Your Kids</string>
 	<string name="logout_text">Logout</string>
 	<string name="editAccount_text">Edit Account</string>
+	<string name="name">Name</string>
+	<string name="age">Age</string>
 </resources>

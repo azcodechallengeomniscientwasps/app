@@ -7,46 +7,42 @@
     tools:context="com.makeapede.azcodechallengeapp.GameListActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_colors"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        android:text="Colors!"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        android:background="@mipmap/colors"
+        app:layout_constraintBottom_toTopOf="@+id/button_letters"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="@+id/button_counting"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_counting"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@android:color/holo_green_light"
-        android:text="Counting!"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintLeft_toRightOf="@+id/button2"
+        android:background="@mipmap/numbers"
+        app:layout_constraintBottom_toTopOf="@+id/button_stuff"
+        app:layout_constraintLeft_toRightOf="@+id/button_colors"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_letters"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/yelllow"
-        android:text="Letters!"
+        android:background="@mipmap/alphabet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintRight_toLeftOf="@+id/button_stuff"
+        app:layout_constraintTop_toBottomOf="@+id/button_colors"/>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_stuff"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        android:text="Stuff!"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/button4"
+        app:layout_constraintLeft_toRightOf="@+id/button_letters"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/button_counting"/>
 </android.support.constraint.ConstraintLayout>

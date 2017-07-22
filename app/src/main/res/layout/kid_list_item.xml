@@ -38,6 +38,7 @@
 			android:layout_height="match_parent"
 			android:layout_weight="1"
 			android:gravity="center_vertical"
+			android:paddingLeft="8dp"
 			tools:text="Name"/>
 
 		<TextView
@@ -46,6 +47,7 @@
 			android:layout_height="match_parent"
 			android:layout_weight="1"
 			android:gravity="center_vertical|end"
+			android:paddingRight="8dp"
 			tools:text="Age"/>
 
 	</LinearLayout>
