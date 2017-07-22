@@ -18,8 +18,8 @@
   -->
 
 <resources>
-	<color name="colorPrimary">#3f51b5</color>
-	<color name="colorPrimaryDark">#303F9F</color>
-	<color name="colorAccent">#ff4081</color>
-	<color name="yelllow">#f8f007</color>
+	<color name="colorPrimary">#7dacf8</color>
+	<color name="colorPrimaryDark">#5778ad</color>
+	<color name="colorAccent">#d0706e</color>
+	<color name="yellow">#f8f007</color>
 </resources>

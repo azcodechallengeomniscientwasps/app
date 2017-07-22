@@ -13,6 +13,9 @@ public class GameListActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_list);
+
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		findViewById(R.id.button_colors).setOnClickListener((v) -> {
 			startActivity(new Intent(this, ColorsActivity.class));
 		});
@@ -29,5 +32,4 @@ public class GameListActivity extends AppCompatActivity {
 
 		});
 	}
-
 }

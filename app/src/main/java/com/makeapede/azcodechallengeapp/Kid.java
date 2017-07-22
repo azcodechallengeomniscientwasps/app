@@ -2,13 +2,18 @@ package com.makeapede.azcodechallengeapp;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.Exclude;
+
 public class Kid implements Comparable<Kid> {
-	public int age;
+	public String age;
 	public String name;
+
+	@Exclude
+	public String uid;
 
 	public Kid() {}
 
-	public Kid(int age, String name) {
+	public Kid(String age, String name) {
 		this.age = age;
 		this.name = name;
 	}

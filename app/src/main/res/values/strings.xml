@@ -19,8 +19,14 @@
 <resources>
 	<string name="app_name">AZCodeChallengeApp</string>
 	<string name="kid_list_title">Your Kids</string>
+	<string name="game_list_title">Games</string>
+	<string name="counting_game_title">Counting</string>
+	<string name="letters_game_title">Letters</string>
+	<string name="colors_game_title">Colors</string>
+	<string name="events_title">Upcoming Events</string>
 	<string name="logout_text">Logout</string>
 	<string name="editAccount_text">Edit Account</string>
 	<string name="name">Name</string>
 	<string name="age">Age</string>
+	<string name="events">Events</string>
 </resources>

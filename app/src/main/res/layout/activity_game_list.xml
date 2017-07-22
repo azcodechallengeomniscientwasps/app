@@ -33,8 +33,9 @@
         android:background="@mipmap/alphabet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/button_stuff"
-        app:layout_constraintTop_toBottomOf="@+id/button_colors"/>
+        app:layout_constraintTop_toBottomOf="@+id/button_colors"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/button_stuff"
