@@ -12,41 +12,48 @@ import android.widget.Toast;
 import com.makeapede.azcodechallengeapp.R;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class LettersActivity extends AppCompatActivity {
 
-	private class ButtonPlus{
-		boolean taken = false;
-		boolean win = false;
-		Button bla;
-		ButtonPlus(Button a){
-			bla = a;
-		}
-
-		void setText(String text){
-			bla.setText(text);
-		}
-		void setWin(boolean a){
-			win = a;
-		}
-		boolean getWin(){
-			return win;
-		}
-		Button getButton(){
-			return bla;
-		}
-	}
-	ArrayList<ButtonPlus> buttons = new ArrayList<>();
-
 	int winValue;
 	int winButton;
 	boolean[] taken = new boolean[26];
-	private String filenametaptheletter;
-	private String[] filenames = new String[26];
+
+	String filenametaptheletter;
+	String filenamea;
+	String filenameb;
+	String filenamec;
+	String filenamed;
+	String filenamee;
+	String filenamef;
+	String filenameg;
+	String filenameh;
+	String filenamei;
+	String filenamej;
+	String filenamek;
+	String filenamel;
+	String filenamem;
+	String filenamen;
+	String filenameo;
+	String filenamep;
+	String filenameq;
+	String filenamer;
+	String filenames;
+	String filenamet;
+	String filenameu;
+	String filenamev;
+	String filenamew;
+	String filenamex;
+	String filenamey;
+	String filenamez;
 	String filenameCorrect;
 	String filenameTryAgain;
+
+	Button button1;
+	Button button2;
+	Button button3;
+	Button button4;
 
 	char[] letters = new char[26];
 
@@ -152,11 +159,6 @@ public class LettersActivity extends AppCompatActivity {
 			taken[i] = false;
 		}
 	}
-	void clearWin(){
-		for(int i=0; i<4; i++){
-			buttons.get(i).setWin(false);
-		}
-	}
 
 	void cycleGame(boolean winner) {
 		if(winner) {
@@ -165,37 +167,171 @@ public class LettersActivity extends AppCompatActivity {
 			//toast correct!
 			Toast.makeText(this, "CORRECT!", Toast.LENGTH_SHORT).show();
 
-			clearWin();
+			button1.setTag(false);
+			button2.setTag(false);
+			button3.setTag(false);
+			button4.setTag(false);
 			clearTaken();
 
 			winValue = randInt(25,0);
-			String templetter  = filenames[winValue];;
+			String templetter  = filenamea;;
+			switch (winValue){
+				case 0:
+					templetter = filenamea;
+					break;
+				case 1:
+					templetter = filenameb;
+					break;
+				case 2:
+					templetter = filenamec;
+					break;
+				case 3:
+					templetter = filenamed;
+					break;
+				case 4:
+					templetter = filenamee;
+					break;
+				case 5:
+					templetter = filenamef;
+					break;
+				case 6:
+					templetter = filenameg;
+					break;
+				case 7:
+					templetter = filenameh;
+					break;
+				case 8:
+					templetter = filenamei;
+					break;
+				case 9:
+					templetter = filenamej;
+					break;
+				case 10:
+					templetter = filenamek;
+					break;
+				case 11:
+					templetter = filenamel;
+					break;
+				case 12:
+					templetter = filenamem;
+					break;
+				case 13:
+					templetter = filenamen;
+					break;
+				case 14:
+					templetter = filenameo;
+					break;
+				case 15:
+					templetter = filenamep;
+					break;
+				case 16:
+					templetter = filenameq;
+					break;
+				case 17:
+					templetter = filenamer;
+					break;
+				case 18:
+					templetter = filenames;
+					break;
+				case 19:
+					templetter = filenamet;
+					break;
+				case 20:
+					templetter = filenameu;
+					break;
+				case 21:
+					templetter = filenamev;
+					break;
+				case 22:
+					templetter = filenamew;
+					break;
+				case 23:
+					templetter = filenamex;
+					break;
+				case 24:
+					templetter = filenamey;
+					break;
+				case 25:
+					templetter = filenamez;
+					break;
+			}
 
 			playAudio(filenameCorrect, filenametaptheletter, templetter);
 			taken[winValue] = true;
 			winButton = randInt(4, 1);
 			Log.d("LettersActivity", String.valueOf(winButton));
-			for(int i = 0; i < 4; i++){
-				if((i+1) == winButton) {
-					buttons.get(i).setWin(true);
-				}
-				else{
-					buttons.get(i).setWin(false);
-				}
+			switch (winButton){
+				case 1:
+					button1.setText(String.valueOf(letters[winValue]));
+					button1.setTag(true);
+					button2.setTag(false);
+					button3.setTag(false);
+					button4.setTag(false);
+					break;
+				case 2:
+					button2.setText(String.valueOf(letters[winValue]));
+					button2.setTag(true);
+					button1.setTag(false);
+					button3.setTag(false);
+					button4.setTag(false);
+					break;
+				case 3:
+					button3.setText(String.valueOf(letters[winValue]));
+					button3.setTag(true);
+					button1.setTag(false);
+					button2.setTag(false);
+					button4.setTag(false);
+					break;
+				case 4:
+					button4.setText(String.valueOf(letters[winValue]));
+					button4.setTag(true);
+					button1.setTag(false);
+					button2.setTag(false);
+					button3.setTag(false);
+					break;
 			}
-			buttons.get(winButton-1).setText(String.valueOf(letters[winValue]));
-			for(int i = 0; i < 4; i++){
-				if(!buttons.get(i).getWin()){
-					int backgroundValue = randInt(25, 0);
-					while(taken[backgroundValue]){
-						backgroundValue = randInt(25, 0);
-						Log.d("ColorsActivity", "button1");
-						Log.d("ColorsActivity", String.valueOf(backgroundValue));
-					}
-					buttons.get(i).setText(String.valueOf(letters[backgroundValue]));
-					taken[backgroundValue] = true;
+
+			if(!(button1.getTag().equals(true))){
+				int backgroundValue = randInt(25, 0);
+				while(taken[backgroundValue]){
+					backgroundValue = randInt(25, 0);
+					Log.d("ColorsActivity", "button1");
+					Log.d("ColorsActivity", String.valueOf(backgroundValue));
 				}
+				button1.setText(String.valueOf(letters[backgroundValue]));
+				taken[backgroundValue] = true;
 			}
+			if(!(button2.getTag().equals(true))){
+				int backgroundValue = randInt(25, 0);
+				while(taken[backgroundValue]){
+					backgroundValue = randInt(25, 0);
+					Log.d("ColorsActivity", "button2");
+					Log.d("ColorsActivity", String.valueOf(backgroundValue));
+				}
+				button2.setText(String.valueOf(letters[backgroundValue]));
+				taken[backgroundValue] = true;
+			}
+			if(!(button3.getTag().equals(true))){
+				int backgroundValue = randInt(25, 0);
+				while(taken[backgroundValue]){
+					backgroundValue = randInt(25, 0);
+					Log.d("ColorsActivity", "button3");
+					Log.d("ColorsActivity", String.valueOf(backgroundValue));
+				}
+				button3.setText(String.valueOf(letters[backgroundValue]));
+				taken[backgroundValue] = true;
+			}
+			if(!(button4.getTag().equals(true))){
+				int backgroundValue = randInt(25, 0);
+				while(taken[backgroundValue]){
+					backgroundValue = randInt(25, 0);
+					Log.d("ColorsActivity", "button4");
+					Log.d("ColorsActivity", String.valueOf(backgroundValue));
+				}
+				button4.setText(String.valueOf(letters[backgroundValue]));
+				taken[backgroundValue] = true;
+			}
+
 		} else {
 			Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
 			playAudio(filenameTryAgain);
@@ -210,40 +346,44 @@ public class LettersActivity extends AppCompatActivity {
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		filenames[0] = "android.resource://" + this.getPackageName() + "/raw/a";
-		filenames[1] = "android.resource://" + this.getPackageName() + "/raw/b";
-		filenames[2] = "android.resource://" + this.getPackageName() + "/raw/c";
-		filenames[3] = "android.resource://" + this.getPackageName() + "/raw/d";
-		filenames[4] = "android.resource://" + this.getPackageName() + "/raw/e";
-		filenames[5] = "android.resource://" + this.getPackageName() + "/raw/f";
-		filenames[6] = "android.resource://" + this.getPackageName() + "/raw/g";
-		filenames[7] = "android.resource://" + this.getPackageName() + "/raw/h";
-		filenames[8] = "android.resource://" + this.getPackageName() + "/raw/i";
-		filenames[9] = "android.resource://" + this.getPackageName() + "/raw/j";
-		filenames[10] = "android.resource://" + this.getPackageName() + "/raw/k";
-		filenames[11] = "android.resource://" + this.getPackageName() + "/raw/l";
-		filenames[12] = "android.resource://" + this.getPackageName() + "/raw/m";
-		filenames[13]= "android.resource://" + this.getPackageName() + "/raw/n";
-		filenames[14] = "android.resource://" + this.getPackageName() + "/raw/o";
-		filenames[15] = "android.resource://" + this.getPackageName() + "/raw/p";
-		filenames[16] = "android.resource://" + this.getPackageName() + "/raw/q";
-		filenames[17] = "android.resource://" + this.getPackageName() + "/raw/r";
-		filenames[18] = "android.resource://" + this.getPackageName() + "/raw/s";
-		filenames[19] = "android.resource://" + this.getPackageName() + "/raw/t";
-		filenames[20] = "android.resource://" + this.getPackageName() + "/raw/u";
-		filenames[21] = "android.resource://" + this.getPackageName() + "/raw/v";
-		filenames[22] = "android.resource://" + this.getPackageName() + "/raw/w";
-		filenames[23] = "android.resource://" + this.getPackageName() + "/raw/x";
-		filenames[24] = "android.resource://" + this.getPackageName() + "/raw/y";
-		filenames[25] = "android.resource://" + this.getPackageName() + "/raw/z";
+		filenamea = "android.resource://" + this.getPackageName() + "/raw/a";
+		filenameb = "android.resource://" + this.getPackageName() + "/raw/b";
+		filenamec = "android.resource://" + this.getPackageName() + "/raw/c";
+		filenamed = "android.resource://" + this.getPackageName() + "/raw/d";
+		filenamee = "android.resource://" + this.getPackageName() + "/raw/e";
+		filenamef = "android.resource://" + this.getPackageName() + "/raw/f";
+		filenameg = "android.resource://" + this.getPackageName() + "/raw/g";
+		filenameh = "android.resource://" + this.getPackageName() + "/raw/h";
+		filenamei = "android.resource://" + this.getPackageName() + "/raw/i";
+		filenamej = "android.resource://" + this.getPackageName() + "/raw/j";
+		filenamek = "android.resource://" + this.getPackageName() + "/raw/k";
+		filenamel = "android.resource://" + this.getPackageName() + "/raw/l";
+		filenamem = "android.resource://" + this.getPackageName() + "/raw/m";
+		filenamen = "android.resource://" + this.getPackageName() + "/raw/n";
+		filenameo = "android.resource://" + this.getPackageName() + "/raw/o";
+		filenamep = "android.resource://" + this.getPackageName() + "/raw/p";
+		filenameq = "android.resource://" + this.getPackageName() + "/raw/q";
+		filenamer = "android.resource://" + this.getPackageName() + "/raw/r";
+		filenames = "android.resource://" + this.getPackageName() + "/raw/s";
+		filenamet = "android.resource://" + this.getPackageName() + "/raw/t";
+		filenameu = "android.resource://" + this.getPackageName() + "/raw/u";
+		filenamev = "android.resource://" + this.getPackageName() + "/raw/v";
+		filenamew = "android.resource://" + this.getPackageName() + "/raw/w";
+		filenamex = "android.resource://" + this.getPackageName() + "/raw/x";
+		filenamey = "android.resource://" + this.getPackageName() + "/raw/y";
+		filenamez = "android.resource://" + this.getPackageName() + "/raw/z";
 		filenametaptheletter = "android.resource://" + this.getPackageName() + "/raw/taptheletter";
 		filenameCorrect = "android.resource://" + this.getPackageName() + "/raw/correct";
 		filenameTryAgain = "android.resource://" + this.getPackageName() + "/raw/tryagain";
 
-		buttons.add(0, new ButtonPlus((Button)findViewById(R.id.button1)));
-		buttons.add(1, new ButtonPlus((Button)findViewById(R.id.button2)));
-		buttons.add(2, new ButtonPlus((Button)findViewById(R.id.button3)));
-		buttons.add(3, new ButtonPlus((Button)findViewById(R.id.button4)));
+		button1=(Button)findViewById(R.id.button1);
+		button2=(Button)findViewById(R.id.button2);
+		button3=(Button)findViewById(R.id.button3);
+		button4=(Button)findViewById(R.id.button4);
+		button1.setTag(false);
+		button2.setTag(false);
+		button3.setTag(false);
+		button4.setTag(false);
 
 		letters[0] = 'A';
 		letters[1] = 'B';
@@ -273,44 +413,195 @@ public class LettersActivity extends AppCompatActivity {
 		letters[25] = 'Z';
 
 		winValue = randInt(25,0);
-		String templetter = filenames[winValue];
+		String templetter  = filenamea;;
+		switch (winValue){
+			case 0:
+				templetter = filenamea;
+				break;
+			case 1:
+				templetter = filenameb;
+				break;
+			case 2:
+				templetter = filenamec;
+				break;
+			case 3:
+				templetter = filenamed;
+				break;
+			case 4:
+				templetter = filenamee;
+				break;
+			case 5:
+				templetter = filenamef;
+				break;
+			case 6:
+				templetter = filenameg;
+				break;
+			case 7:
+				templetter = filenameh;
+				break;
+			case 8:
+				templetter = filenamei;
+				break;
+			case 9:
+				templetter = filenamej;
+				break;
+			case 10:
+				templetter = filenamek;
+				break;
+			case 11:
+				templetter = filenamel;
+				break;
+			case 12:
+				templetter = filenamem;
+				break;
+			case 13:
+				templetter = filenamen;
+				break;
+			case 14:
+				templetter = filenameo;
+				break;
+			case 15:
+				templetter = filenamep;
+				break;
+			case 16:
+				templetter = filenameq;
+				break;
+			case 17:
+				templetter = filenamer;
+				break;
+			case 18:
+				templetter = filenames;
+				break;
+			case 19:
+				templetter = filenamet;
+				break;
+			case 20:
+				templetter = filenameu;
+				break;
+			case 21:
+				templetter = filenamev;
+				break;
+			case 22:
+				templetter = filenamew;
+				break;
+			case 23:
+				templetter = filenamex;
+				break;
+			case 24:
+				templetter = filenamey;
+				break;
+			case 25:
+				templetter = filenamez;
+				break;
+		}
+
 		playAudio(filenametaptheletter, templetter);
 		taken[winValue] = true;
 		winButton = randInt(4, 1);
 		Log.d("LettersActivity", String.valueOf(winButton));
-		for(int i = 0; i < 4; i++){
-			if((i+1) == winButton) {
-				buttons.get(i).setWin(true);
-			}
-			else{
-				buttons.get(i).setWin(false);
-			}
-		}
-		buttons.get(winButton-1).setText(String.valueOf(letters[winValue]));
-		for(int i = 0; i < 4; i++){
-			if(!buttons.get(i).getWin()){
-				int backgroundValue = randInt(25, 0);
-				while(taken[backgroundValue]){
-					backgroundValue = randInt(25, 0);
-					Log.d("ColorsActivity", "button1");
-					Log.d("ColorsActivity", String.valueOf(backgroundValue));
-				}
-				buttons.get(i).setText(String.valueOf(letters[backgroundValue]));
-				taken[backgroundValue] = true;
-			}
+		switch (winButton){
+			case 1:
+				button1.setText(String.valueOf(letters[winValue]));
+				button1.setTag(true);
+				button2.setTag(false);
+				button3.setTag(false);
+				button4.setTag(false);
+				break;
+			case 2:
+				button2.setText(String.valueOf(letters[winValue]));
+				button2.setTag(true);
+				button1.setTag(false);
+				button3.setTag(false);
+				button4.setTag(false);
+				break;
+			case 3:
+				button3.setText(String.valueOf(letters[winValue]));
+				button3.setTag(true);
+				button1.setTag(false);
+				button2.setTag(false);
+				button4.setTag(false);
+				break;
+			case 4:
+				button4.setText(String.valueOf(letters[winValue]));
+				button4.setTag(true);
+				button1.setTag(false);
+				button2.setTag(false);
+				button3.setTag(false);
+				break;
 		}
 
-		buttons.get(0).getButton().setOnClickListener((v) -> {
-			cycleGame(buttons.get(0).getWin());
+		if(!(button1.getTag().equals(true))){
+			int backgroundValue = randInt(25, 0);
+			while(taken[backgroundValue]){
+				backgroundValue = randInt(25, 0);
+				Log.d("ColorsActivity", "button1");
+				Log.d("ColorsActivity", String.valueOf(backgroundValue));
+			}
+			button1.setText(String.valueOf(letters[backgroundValue]));
+			taken[backgroundValue] = true;
+		}
+		if(!(button2.getTag().equals(true))){
+			int backgroundValue = randInt(25, 0);
+			while(taken[backgroundValue]){
+				backgroundValue = randInt(25, 0);
+				Log.d("ColorsActivity", "button2");
+				Log.d("ColorsActivity", String.valueOf(backgroundValue));
+			}
+			button2.setText(String.valueOf(letters[backgroundValue]));
+			taken[backgroundValue] = true;
+		}
+		if(!(button3.getTag().equals(true))){
+			int backgroundValue = randInt(25, 0);
+			while(taken[backgroundValue]){
+				backgroundValue = randInt(25, 0);
+				Log.d("ColorsActivity", "button3");
+				Log.d("ColorsActivity", String.valueOf(backgroundValue));
+			}
+			button3.setText(String.valueOf(letters[backgroundValue]));
+			taken[backgroundValue] = true;
+		}
+		if(!(button4.getTag().equals(true))){
+			int backgroundValue = randInt(25, 0);
+			while(taken[backgroundValue]){
+				backgroundValue = randInt(25, 0);
+				Log.d("ColorsActivity", "button4");
+				Log.d("ColorsActivity", String.valueOf(backgroundValue));
+			}
+			button4.setText(String.valueOf(letters[backgroundValue]));
+			taken[backgroundValue] = true;
+		}
+
+		button1.setOnClickListener((v) -> {
+			if(button1.getTag().equals(true)) {
+				cycleGame(true);
+			}
+			else{
+				cycleGame(false);
+			}
 		});
-		buttons.get(1).getButton().setOnClickListener((v) -> {
-			cycleGame(buttons.get(1).getWin());
+		button2.setOnClickListener((v) -> {
+			if(button2.getTag().equals(true)) {
+				cycleGame(true);
+			}
+			else{
+				cycleGame(false);
+			}
 		});
-		buttons.get(2).getButton().setOnClickListener((v) -> {
-			cycleGame(buttons.get(2).getWin());
+		button3.setOnClickListener((v) -> {
+			if(button3.getTag().equals(true)) {
+				cycleGame(true);
+			}
+			else{
+				cycleGame(false);
+			}
 		});
-		buttons.get(3).getButton().setOnClickListener((v) -> {
-			cycleGame(buttons.get(3).getWin());
+		button4.setOnClickListener((v) -> {
+			if(button4.getTag().equals(true)) {
+				cycleGame(true);
+			}
+			else{
+				cycleGame(false);
+			}
 		});
 	}
 }
